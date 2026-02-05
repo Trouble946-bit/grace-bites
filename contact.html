@@ -97,6 +97,35 @@
         subjectField.value = `Order: ${item}`;
         messageField.value = `I would like to order ${item}${price ? ' (MWK ' + price + ')' : ''}.\n\nPlease provide me with more details about availability and delivery options.\n\nThank you!`;
       }
+
+      // WhatsApp redirect on form submission
+      const contactForm = document.querySelector('.contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form values
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const subject = document.getElementById('subject').value;
+          const message = document.getElementById('message').value;
+          
+          // Format phone number for WhatsApp (remove spaces and special characters)
+          const phoneNumber = '265992089216'; // +265 (992) 089-216
+          
+          // Construct WhatsApp message
+          const whatsappMessage = `*Name:* ${name}\n*Email:* ${email}\n*Subject:* ${subject}\n\n*Message:*\n${message}`;
+          
+          // Encode message for URL
+          const encodedMessage = encodeURIComponent(whatsappMessage);
+          
+          // Create WhatsApp URL
+          const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+          
+          // Open WhatsApp in new tab
+          window.open(whatsappURL, '_blank');
+        });
+      }
     });
   </script>
 </body>
