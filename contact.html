@@ -63,6 +63,10 @@
             <input type="email" id="email" name="email" required />
           </div>
           <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+265 xxx xxx xxx" required />
+          </div>
+          <div class="form-group">
             <label for="subject">Subject</label>
             <input type="text" id="subject" name="subject" required />
           </div>
@@ -107,6 +111,7 @@
           // Get form values
           const name = document.getElementById('name').value;
           const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
           const subject = document.getElementById('subject').value;
           const message = document.getElementById('message').value;
           
@@ -114,7 +119,7 @@
           const phoneNumber = '265992089216'; // +265 (992) 089-216
           
           // Construct WhatsApp message
-          const whatsappMessage = `*Name:* ${name}\n*Email:* ${email}\n*Subject:* ${subject}\n\n*Message:*\n${message}`;
+          const whatsappMessage = `*Name:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Subject:* ${subject}\n\n*Message:*\n${message}`;
           
           // Encode message for URL
           const encodedMessage = encodeURIComponent(whatsappMessage);
