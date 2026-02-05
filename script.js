@@ -54,76 +54,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Form Validation and Submission
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const subject = document.getElementById('subject').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    // Client-side validation
-    let isValid = true;
-    let errors = [];
-
-    if (name.length < 2) {
-      errors.push('Name must be at least 2 characters');
-      isValid = false;
-    }
-
-    if (!validateEmail(email)) {
-      errors.push('Please enter a valid email address');
-      isValid = false;
-    }
-
-    if (subject.length < 3) {
-      errors.push('Subject must be at least 3 characters');
-      isValid = false;
-    }
-
-    if (message.length < 10) {
-      errors.push('Message must be at least 10 characters');
-      isValid = false;
-    }
-
-    if (!isValid) {
-      showNotification(errors.join('\n'), 'error');
-      return;
-    }
-
-    // Send to backend
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          subject,
-          message
-        })
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        showNotification(data.error || 'Failed to send message', 'error');
-        return;
-      }
-
-      showNotification(data.message, 'success');
-      contactForm.reset();
-    } catch (error) {
-      console.error('Submission error:', error);
-      showNotification('Network error. Please try again.', 'error');
-    }
-  });
-}
+// Form validation is handled in contact.html with WhatsApp integration
 
 // Email validation helper
 function validateEmail(email) {
