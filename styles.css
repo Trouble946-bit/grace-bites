@@ -270,6 +270,7 @@ body {
   top: 50%;
   right: 8%;
   animation-delay: 2s;
+  mix-blend-mode: multiply;
 }
 
 .float-3 {
